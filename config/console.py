@@ -1,12 +1,8 @@
+# - Importing basics requirements - #
 from colorama import *
+import cmd
 init()
 
-class InputC():
-    def entry(self):
-        while True:
-            command = input(Fore.GREEN + "[usr] > ")
-            self.execute(command)
+class Commands(cmd.Cmd):
 
-    def execute(self, command):
-        if command == "help":
-            
+    prompt = "\033[4;32m"+"[usr]"+"\033[0;32m > "+"\033[0;37m"
