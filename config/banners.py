@@ -3,7 +3,7 @@ from random import randint
 
 class Banners():
     def print_banner(self):
-        bannern = randint(0,3)
+        bannern = randint(1,3)
         print(bannern)
 
         if bannern == 1:

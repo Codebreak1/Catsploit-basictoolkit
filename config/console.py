@@ -2,6 +2,7 @@
 from colorama import *
 from config.banners import Banners
 import cmd
+import os
 init()
 
 class Commands(cmd.Cmd):
@@ -13,7 +14,14 @@ class Commands(cmd.Cmd):
     def do_exit(self, args):
         print(Style.BRIGHT + Fore.CYAN + "[CS] //Leaving . . ." + Style.NORMAL)
         exit()
+        os.system("cls")
 
     def do_banner(self, args):
         bann = Banners()
         bann.print_banner()
+
+    def emptyline(self, args):
+        print("")
+
+    def default(self, args):
+        print(Fore.RED + Style.NORMAL + "[CS] Unknown command: '{}'\n".format(args))

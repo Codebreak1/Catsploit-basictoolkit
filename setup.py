@@ -6,7 +6,7 @@ try:
     from colorama import *
 
 except ImportError:
-    os.system("pip install colorama")
+    os.system("pip install colorama -q")
 init()
 
 
