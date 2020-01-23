@@ -1,7 +1,7 @@
 # - Importing basics requirements - #
 from colorama import *
+from config.banners import Banners
 import cmd
-import banners
 init()
 
 class Commands(cmd.Cmd):
@@ -11,11 +11,9 @@ class Commands(cmd.Cmd):
         print("This is a simple test, working")
 
     def do_exit(self, args):
-        print("Exit")
+        print(Style.BRIGHT + Fore.CYAN + "[CS] //Leaving . . ." + Style.NORMAL)
         exit()
 
     def do_banner(self, args):
-            print_banner()
-
-console = Commands()
-console.cmdloop()
+        bann = Banners()
+        bann.print_banner()

@@ -45,6 +45,3 @@ class Banners():
 
             __-[0 exploits - 0 addons  - 0 frameworks]-__
             __-[2 develops - 2 modules - 3 banners   ]-__ by Catsploit & Kalinka\n""")
-
-test = Banners()
-test.print_banner()
