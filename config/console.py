@@ -17,8 +17,21 @@ class Commands(cmd.Cmd):
         os.system("cls")
 
     def do_banner(self, args):
+        os.system("cls")
         bann = Banners()
         bann.print_banner()
+
+    def do_cls(self, args):
+        os.system("cls")
+        bann = Banners()
+        bann.print_banner()
+
+    def do_import(self, args):
+        actualdirectory = os.getcwd()
+        module_list = os.listdir("modules")
+
+        for args in module_list:
+            pass
 
     def emptyline(self, args):
         print("")

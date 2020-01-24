@@ -4,9 +4,10 @@ from random import randint
 class Banners():
     def print_banner(self):
         bannern = randint(1,3)
-        print(bannern)
+        #print(banner)
 
         if bannern == 1:
+            print("\n")
             print(Fore.LIGHTBLACK_EX+"[CS] [0.0.1] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] []\n")
             print(Fore.GREEN+"> hack\t\t\t\t\t\t\t  "+Fore.LIGHTBLACK_EX+"[]")
             print(Fore.LIGHTBLACK_EX+"[*] Downloading website . . .\t[Sesion1]")
@@ -17,6 +18,7 @@ class Banners():
             count1 = 1
 
         elif bannern == 2:
+            print("\n")
             print(Fore.RED+Style.NORMAL)
             print(r"     ________________________")
             print(r"    |                        |")
@@ -30,6 +32,7 @@ class Banners():
             count1 = 2
 
         elif bannern == 3:
+            print("\n")
             print(Fore.GREEN + Style.NORMAL)
             print(r"_________v1.0     __   _________      .__         .__  __   ")
             print(r"\_   ___ \_____ _/  |_/   _____/_____ |  |   ____ |__|/  |_ ")
