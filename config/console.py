@@ -31,7 +31,8 @@ class Commands(cmd.Cmd):
         module_list = os.listdir("modules")
 
         for args in module_list:
-            pass
+            if args == "r_enc":
+                os.system("cd modules && cd random_encryptor && python r_enc_runfile.py")
 
     def emptyline(self, args):
         print("")
