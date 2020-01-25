@@ -27,12 +27,14 @@ class Commands(cmd.Cmd):
         bann.print_banner()
 
     def do_import(self, args):
-        actualdirectory = os.getcwd()
-        module_list = os.listdir("modules")
+        module_list = os.listdir("config/modules")
 
-        for args in module_list:
+        if args in module_list:
             if args == "r_enc":
-                os.system("cd modules && cd random_encryptor && python r_enc_runfile.py")
+                os.system("cd config/modules/r_enc && python r_enc_runfile.py")
+
+        else:
+            print("{}[CS] Error: Module not found\n".format(Fore.RED))
 
     def emptyline(self, args):
         print("")
