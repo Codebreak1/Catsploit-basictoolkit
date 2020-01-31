@@ -12,7 +12,7 @@ class Commands(cmd.Cmd):
         print("This is a simple test, working")
 
     def do_exit(self, args):
-        print(Style.BRIGHT + Fore.CYAN + "[CS] //Leaving . . ." + Style.NORMAL)
+        print(Style.BRIGHT + Fore.CYAN + "[Cat] //Leaving . . ." + Style.NORMAL)
         exit()
         os.system("cls")
 
@@ -34,10 +34,10 @@ class Commands(cmd.Cmd):
                 os.system("cd config/modules/r_enc && python r_enc_runfile.py")
 
         else:
-            print("{}[CS] Error: Module not found\n".format(Fore.RED))
+            print("{}[Cat] Error: Module not found\n".format(Fore.RED))
 
     def emptyline(self, args):
         print("")
 
     def default(self, args):
-        print(Fore.RED + Style.NORMAL + "[CS] Unknown command: '{}'\n".format(args))
+        print(Fore.RED + Style.NORMAL + "[Cat] Unknown command: '{}'\n".format(args))
