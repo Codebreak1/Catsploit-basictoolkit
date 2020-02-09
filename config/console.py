@@ -33,6 +33,9 @@ class Commands(cmd.Cmd):
             if args == "r_enc":
                 os.system("cd config/modules/r_enc && python r_enc_runfile.py")
 
+            if args == "remote":
+                os.system('cd config/modules/remote && python remote_runfile.py')
+
         else:
             print("{}[Cat] Error: Module not found\n".format(Fore.RED))
 
