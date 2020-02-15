@@ -2,6 +2,8 @@ import socket
 import os
 from colorama import *
 init()
+print("{}[Cat] Imported module{}\n".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
+
 
 class CommandLine():
     def loop(self):
@@ -17,7 +19,7 @@ class CommandLine():
                     obj_server.runserver()
 
                 except Exception as e:
-                    print("{}[Cat] Error: '{}'{}".format(Style.BRIGHT+Fore.RED,e,Style.RESET_ALL))
+                    print("{}[Cat] Error: '{}'{}\n".format(Fore.RED,e,Style.RESET_ALL))
 
             elif line == "exit":
                 print("{}[remote] //Leaving . . .\n".format(Style.BRIGHT+Fore.CYAN))
@@ -32,35 +34,39 @@ class CommandLine():
 
     def set(self, line):
         var = line.split(" ")
-        print(var)
+        #print(var)
 
         if len(var) == 1:
-            print("{}[remote] {}set >> defines variables within the environment\n".format(Style.BRIGHT+Fore.CYAN,Fore.BLACK))
+            print("{}[remote] {}set >> defines variables within the environment{}\n".format(Style.BRIGHT+Fore.CYAN,Fore.BLACK,Style.RESET_ALL))
 
         elif var[1] == "port":
-            if len(var) == 3:
-                port = var[2]
-                port = int(port)
-                print(port)
+            if len(var) == 4:
+                lport = var[2]
+                lport = int(lport)
+                #print(lport)
+                if var[3] == "inlan":
+                    try:
+                        #print(lport)
+                        self.server_addres = ('localhost', lport)
+                        server_addres = self.server_addres
+                        print("{}[remote] Done!{}\n".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
+
+                    except Exception as e:
+                        print("{}[remote] Error: '{}' try to fix it by defining a port{}\n".format(Fore.RED,e,Style.RESET_ALL))
+
+                else:
+                    print("{}[remote] Error: required argument 'in/outlan'{}\n".format(Fore.RED,Style.RESET_ALL))
 
             else:
-                print("{}[Cat] port >> defines the port where your server/client will start{}\n".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
-
-        elif var[1] == "inlan":
-            try:
-                print(port)
-                self.server_addres = ('localhost', port)
-                server_addres = self.server_addres
-
-            except Exception as e:
-                print("{}[Cat] Error: '{}' try to fix it by defining a port{}\n".format(Fore.RED,e,Style.RESET_ALL))
+                print("{}[remote] Error: required arguments{}\n".format(Fore.RED,Style.RESET_ALL))
 
         else:
-            print("{}[Cat] Unknown argument '{}'{}\n".format(Fore.RED,var[1],Style.RESET_ALL))
+            print("{}[remote] Unknown argument '{}'{}\n".format(Fore.RED,var[1],Style.RESET_ALL))
 
 class SServer(CommandLine):
     def runserver(self):
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print(server_addres)
         server.bind(server_addres)
         server.listen(2)
         connection, addr = server.accept()
