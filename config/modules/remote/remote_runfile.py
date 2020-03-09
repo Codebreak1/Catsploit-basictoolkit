@@ -6,6 +6,10 @@ print("{}[Cat] Imported module{}\n".format(Style.BRIGHT+Fore.CYAN,Style.RESET_AL
 
 
 class CommandLine():
+    def __init__(self):
+        self.server_addres = ()
+        server_addres = self.server_addres
+
     def loop(self):
         while True:
             line = input("\033[4;32m"+"[usr]"+"\033[0;36m"+"\033[1;36m"+"(modules/remote)"+"\033[0;32m > "+"\033[0;37m")
@@ -13,10 +17,34 @@ class CommandLine():
             if line.startswith("set"):
                 self.set(line)
 
-            elif line == "runserver":
+            elif line == "run":
                 try:
-                    obj_server = SServer()
-                    obj_server.runserver()
+                    print("\n{}Waiting answer . . .{}".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
+                    server = socket.socket()
+                    server.bind(('localhost', 8000)) #FIX THIS!!!
+                    server.listen(2)
+                    connection, addr = server.accept()
+                    print("{} >> established connection <<{}\n".format(Fore.MAGENTA + Style.BRIGHT, Style.RESET_ALL))
+
+                    while True:
+                        op = input("\033[4;31m"+"[remote]"+"\033[0;36m"+"\033[1;33m"+"(cmd)"+"\033[0;32m > "+"\033[0;37m")
+                        op = op.encode()
+                        connection.send(op)
+
+                        op = op.decode()
+                        client_output = connection.recv(3072)
+                        client_output = client_output.decode()
+                        if client_output == "" or client_output == None:
+                            print("empty")
+                            pass
+                        else:
+                            print(client_output)
+
+                        if op == "exit":
+                            print("{}- connection terminated -{}\n".format(Style.BRIGHT+Fore.RED,Style.RESET_ALL))
+                            connection.close()
+                            server.close()
+                            break
 
                 except Exception as e:
                     print("{}[Cat] Error: '{}'{}\n".format(Fore.RED,e,Style.RESET_ALL))
@@ -40,15 +68,13 @@ class CommandLine():
             print("{}[remote] {}set >> defines variables within the environment{}\n".format(Style.BRIGHT+Fore.CYAN,Fore.BLACK,Style.RESET_ALL))
 
         elif var[1] == "port":
-            if len(var) == 4:
-                lport = var[2]
-                lport = int(lport)
+            if len(var) == 3:
+                lport = 8000
                 #print(lport)
-                if var[3] == "inlan":
+                if var[2] == "inlan":
                     try:
                         #print(lport)
                         self.server_addres = ('localhost', lport)
-                        server_addres = self.server_addres
                         print("{}[remote] Done!{}\n".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
 
                     except Exception as e:
@@ -63,26 +89,6 @@ class CommandLine():
         else:
             print("{}[remote] Unknown argument '{}'{}\n".format(Fore.RED,var[1],Style.RESET_ALL))
 
-class SServer(CommandLine):
-    def runserver(self):
-        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print(server_addres)
-        server.bind(server_addres)
-        server.listen(2)
-        connection, addr = server.accept()
-
-        while True:
-            op = input("\033[4;32m"+"[remote]"+"\033[0;36m"+"\033[1;36m"+"(cmd)"+"\033[0;32m > "+"\033[0;37m")
-            op = op.encode()
-            server.send(op)
-
-            op = op.decode()
-
-            if op == "exit":
-                print("{}- connection terminated -{}".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
-                connection.close()
-                server.close()
-                break
 
 # - Starting - #
 remote_input = CommandLine()
