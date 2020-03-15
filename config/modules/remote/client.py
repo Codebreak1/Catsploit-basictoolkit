@@ -7,7 +7,20 @@ init()
 class SClient():
     def recvinstruction(self):
         client = socket.socket()
-        client.connect(('localhost', 8000))
+
+        in_out = input('[setup/client] in/out >> ')
+        try:
+            if in_out == 'in':
+                localport = int(input('port >> '))
+                client.connect(('localhost', localport))
+
+            elif in_out == 'out':
+                host = str(input('host >> '))
+                port = int(input('port >> '))
+                client.connect((host, port))
+
+        except Exception as e:
+            print("{}[Cat] Error: '{}'{}\n".format(Fore.RED,e,Style.RESET_ALL))
 
         while True:
             instruction = client.recv(3072)

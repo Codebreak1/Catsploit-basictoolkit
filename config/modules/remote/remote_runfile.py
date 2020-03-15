@@ -24,7 +24,8 @@ class CommandLine():
                     server.bind(('localhost', 8000)) #FIX THIS!!!
                     server.listen(2)
                     connection, addr = server.accept()
-                    print("{} >> established connection <<{}\n".format(Fore.MAGENTA + Style.BRIGHT, Style.RESET_ALL))
+                    print("{} >> established connection <<{}".format(Fore.MAGENTA + Style.BRIGHT, Style.RESET_ALL))
+                    print(addr, '\n')
 
                     while True:
                         op = input("\033[4;31m"+"[remote]"+"\033[0;36m"+"\033[1;33m"+"(cmd)"+"\033[0;32m > "+"\033[0;37m")
@@ -76,9 +77,27 @@ class CommandLine():
                         #print(lport)
                         self.server_addres = ('localhost', lport)
                         print("{}[remote] Done!{}\n".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
+                        #requirements = 1
 
                     except Exception as e:
                         print("{}[remote] Error: '{}' try to fix it by defining a port{}\n".format(Fore.RED,e,Style.RESET_ALL))
+
+                elif var[2] == "outlan":
+                    ngrok_run = input('{}[remote] Make sure that you have ngrok running [y/n] {}'.format(Fore.CYAN,Style.RESET_ALL))
+                    if ngrok_run == 'n':
+                        print('Aborting . . .')
+                    elif ngrok_run == 'y':
+                        ngrok_p = int(input('ngrok port >> '))
+                    else:
+                        print('Invalid input, aborting . . .')
+
+                        print("\n{}Waiting answer . . .{}".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
+                        server = socket.socket()
+                        server.bind(('127.0.0.1', ngrok_p))
+                        server.listen(2)
+                        connection, addr = server.accept()
+                        print("{} >> established connection <<{}".format(Fore.MAGENTA + Style.BRIGHT, Style.RESET_ALL))
+                        print(addr, '\n')
 
                 else:
                     print("{}[remote] Error: required argument 'in/outlan'{}\n".format(Fore.RED,Style.RESET_ALL))
