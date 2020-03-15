@@ -1,4 +1,3 @@
-# - Requirimientos básicos del programa - #
 import os
 
 # - Basic color requiriment - #

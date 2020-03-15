@@ -29,6 +29,9 @@ class CommandLine():
 
                     while True:
                         op = input("\033[4;31m"+"[remote]"+"\033[0;36m"+"\033[1;33m"+"(cmd)"+"\033[0;32m > "+"\033[0;37m")
+                        if op == '' or op == None: #Tryng to remove BrokenPipeError
+                            pass
+
                         op = op.encode()
                         connection.send(op)
 
@@ -91,13 +94,13 @@ class CommandLine():
                     else:
                         print('Invalid input, aborting . . .')
 
-                        print("\n{}Waiting answer . . .{}".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
-                        server = socket.socket()
-                        server.bind(('127.0.0.1', ngrok_p))
-                        server.listen(2)
-                        connection, addr = server.accept()
-                        print("{} >> established connection <<{}".format(Fore.MAGENTA + Style.BRIGHT, Style.RESET_ALL))
-                        print(addr, '\n')
+                    print("\n{}Waiting answer . . .{}".format(Style.BRIGHT+Fore.CYAN,Style.RESET_ALL))
+                    server = socket.socket()
+                    server.bind(('127.0.0.1', ngrok_p))
+                    server.listen(2)
+                    connection, addr = server.accept()
+                    print("{} >> established connection <<{}".format(Fore.MAGENTA + Style.BRIGHT, Style.RESET_ALL))
+                    print(addr, '\n')
 
                 else:
                     print("{}[remote] Error: required argument 'in/outlan'{}\n".format(Fore.RED,Style.RESET_ALL))
